@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import SingleTitle from "./components/SingleTitle";
 
 function App() {
+  const [textFile, setTextFile] = useState("");
+  const textTitles = textFile.split(",");
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = () => {
+      setTextFile(reader.result);
+    };
+  };
+  console.log(textFile);
+  console.log(textTitles);
+  textTitles.map((t) => console.log(t));
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <div>
+        <h1> Upload your file here</h1>
+        <input type="file" onChange={handleFileUpload}></input>
+      </div>
+
+      <SingleTitle titles={textTitles} />
+    </React.Fragment>
   );
 }
 
