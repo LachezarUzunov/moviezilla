@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import SingleTitle from "./components/SingleTitle";
 import classes from "./App.module.css";
+import SingleTitle from "./components/SingleTitle";
+import SingleMovie from "./components/SingleMovie";
 
 function App() {
   const [textFile, setTextFile] = useState("");
   const [movieTitles, setMovieTitles] = useState([]);
   const [movieData, setMovieData] = useState([]);
+  const [previewClicked, setPreviewClicked] = useState(false);
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -29,6 +31,7 @@ function App() {
   };
 
   const onFilmsPreview = () => {
+    setPreviewClicked(true);
     movieTitles.forEach(async (movie) => {
       try {
         const response = await fetch(
@@ -37,15 +40,16 @@ function App() {
 
         if (response.status === 200) {
           const filmData = await response.json();
-          console.log(filmData.results);
           let film = {
-            [movie]: filmData.results,
+            movie: movie,
+            filmData: filmData.results,
           };
           setMovieData((prevState) => [...prevState, film]);
         }
       } catch (error) {
         console.log(error);
       }
+      setMovieTitles([]);
     });
   };
   console.log(movieData);
@@ -57,18 +61,36 @@ function App() {
       </div>
       <div className={classes.movieList}>
         <div>
-          {movieTitles.length > 0
-            ? movieTitles.map((title, index) => (
-                <SingleTitle
-                  key={title}
-                  title={title}
-                  index={index}
-                  removeFromList={removeFromList}
-                />
-              ))
-            : null}
+          <div>
+            {movieTitles.length > 0
+              ? movieTitles.map((title, index) => (
+                  <SingleTitle
+                    key={title}
+                    title={title}
+                    index={index}
+                    removeFromList={removeFromList}
+                  />
+                ))
+              : null}
+            {movieData.length > 0
+              ? movieData.map((movie) => (
+                  <React.Fragment>
+                    <div key={movie.movie}>{movie.movie}</div>
+                    <div>
+                      {movie.filmData.map((film) => (
+                        <SingleMovie movie={film} />
+                      ))}
+                    </div>
+                  </React.Fragment>
+                ))
+              : null}
+          </div>
+          <div></div>
         </div>
-        <button onClick={onFilmsPreview}>Preview All Films</button>
+        {!previewClicked ? (
+          <button onClick={onFilmsPreview}>Preview All Films</button>
+        ) : null}
+        {previewClicked ? <button>Save</button> : null}
       </div>
     </React.Fragment>
   );

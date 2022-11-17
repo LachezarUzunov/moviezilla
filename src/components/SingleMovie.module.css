@@ -1,0 +1,6 @@
+.movieDiv {
+    display: flex;
+    align-items: center;
+    background-color: aqua;
+    margin: 1rem;
+}
