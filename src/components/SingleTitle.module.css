@@ -1,3 +1,13 @@
 .titleDiv {
-    background-color: steelblue;
+  display: flex;
+  background-color: aqua;
+  margin-top: 1rem;
+  padding: 1rem;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.button {
+  color: red;
+  cursor: pointer;
 }
