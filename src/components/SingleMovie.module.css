@@ -1,6 +1,10 @@
-.movieDiv {
-    display: flex;
-    align-items: center;
+.movie__div {
     background-color: aqua;
     margin: 1rem;
+}
+
+.movie__heading {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
 }

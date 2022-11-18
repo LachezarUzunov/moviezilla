@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import classes from "./App.module.css";
 import SingleTitle from "./components/SingleTitle";
 import SingleMovie from "./components/SingleMovie";
+import { FaEdit } from "react-icons/fa";
 
 function App() {
   const [textFile, setTextFile] = useState("");
@@ -75,7 +76,16 @@ function App() {
             {movieData.length > 0
               ? movieData.map((movie) => (
                   <React.Fragment>
-                    <div key={movie.movie}>{movie.movie}</div>
+                    <div className={classes.movie__title} key={movie.movie}>
+                      <h2 >
+                        {movie.movie}{" "}
+                        <i>
+                          <FaEdit />
+                        </i>
+                      </h2>
+                    </div>
+                    <h3>Results:</h3>
+
                     <div>
                       {movie.filmData.map((film) => (
                         <SingleMovie movie={film} />

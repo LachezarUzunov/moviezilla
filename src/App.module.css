@@ -3,3 +3,9 @@
   padding: 2rem;
   margin: 2rem 8rem;
 }
+
+.movie__title {
+  background-color: darkblue;
+  padding: 1.2rem;
+  color: white;
+}
