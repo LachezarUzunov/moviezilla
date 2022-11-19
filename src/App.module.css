@@ -9,3 +9,23 @@
   padding: 1.2rem;
   color: white;
 }
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 4rem 0 2.4rem;
+  background-color: black;
+  color: yellow;
+}
+
+.header__title {
+  letter-spacing: 0.4rem;
+  border-bottom: 1px solid yellowgreen;
+}
+
+.movie__title {
+  background-color: blue;
+  margin: 1rem;
+}

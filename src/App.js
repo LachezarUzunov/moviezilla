@@ -9,6 +9,8 @@ function App() {
   const [movieTitles, setMovieTitles] = useState([]);
   const [movieData, setMovieData] = useState([]);
   const [previewClicked, setPreviewClicked] = useState(false);
+  const [titleEditMode, setTitleEditMode] = useState(false);
+  const [actors, setActors] = useState();
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -53,11 +55,19 @@ function App() {
       setMovieTitles([]);
     });
   };
+
+  const handleTitleEdit = () => {
+    setTitleEditMode(true);
+  };
   console.log(movieData);
   return (
     <React.Fragment>
       <div>
-        <h1> Upload your file here</h1>
+        <div className={classes.header}>
+          <h1 className={classes.header__title}>THE MOVIEZILLA DATABASE</h1>
+          <h3>Where movie fanatics reside!</h3>
+        </div>
+        <h4> Upload your file here</h4>
         <input type="file" onChange={handleFileUpload}></input>
       </div>
       <div className={classes.movieList}>
@@ -77,12 +87,19 @@ function App() {
               ? movieData.map((movie) => (
                   <React.Fragment>
                     <div className={classes.movie__title} key={movie.movie}>
-                      <h2 >
-                        {movie.movie}{" "}
-                        <i>
-                          <FaEdit />
-                        </i>
-                      </h2>
+                      {!titleEditMode ? (
+                        <div>
+                          <h2>{movie.movie} </h2>
+                          <i>
+                            <FaEdit onClick={handleTitleEdit} />
+                          </i>
+                        </div>
+                      ) : (
+                        <React.Fragment>
+                          <input placeholder={movie.movie}></input>
+                          <button>Check again</button>
+                        </React.Fragment>
+                      )}
                     </div>
                     <h3>Results:</h3>
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { FaTrash, FaEdit } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
 import classes from "./SingleMovie.module.css";
 
 const SingleMovie = ({ movie }) => {
