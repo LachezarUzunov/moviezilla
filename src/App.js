@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import classes from "./App.module.css";
 import SingleTitle from "./components/SingleTitle";
-import SingleMovie from "./components/SingleMovie";
+import SingleMovie from "./components/SingleMovie/SingleMovie";
 import { FaEdit } from "react-icons/fa";
 
 function App() {
@@ -59,12 +59,12 @@ function App() {
   const handleTitleEdit = () => {
     setTitleEditMode(true);
   };
-  console.log(movieData);
+  // console.log(movieData);
   return (
     <React.Fragment>
       <div>
         <div className={classes.header}>
-          <h1 className={classes.header__title}>THE MOVIEZILLA DATABASE</h1>
+          <h1 className={classes.header__title}>MOVIEZILLA</h1>
           <h3>Where movie fanatics reside!</h3>
         </div>
         <h4> Upload your file here</h4>
@@ -96,7 +96,10 @@ function App() {
                         </div>
                       ) : (
                         <React.Fragment>
-                          <input placeholder={movie.movie}></input>
+                          <input
+                            placeholder={movie.movie}
+                            key={movie.movie}
+                          ></input>
                           <button>Check again</button>
                         </React.Fragment>
                       )}
