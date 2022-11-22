@@ -40,3 +40,7 @@ h1 {
   font-family: 'Monoton', cursive;
   font-size: 6rem;
 }
+
+.iconBtn {
+  cursor: pointer;
+}

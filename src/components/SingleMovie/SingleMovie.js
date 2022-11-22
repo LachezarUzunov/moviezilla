@@ -3,10 +3,14 @@ import { FaTrash } from "react-icons/fa";
 import classes from "./SingleMovie.module.css";
 import Actors from "./Actors";
 import Director from "./Director";
+import Genres from "./Genres";
 
-const SingleMovie = ({ movie }) => {
+const SingleMovie = ({ movie, removeFromList }) => {
   const [actors, setActors] = useState([]);
   const [directors, setDirectors] = useState([]);
+  const [genres, setGenres] = useState([]);
+  const [duration, setDuration] = useState();
+  const [trailer, setTrailer] = useState();
 
   useEffect(() => {
     const getActorsAndDirector = async () => {
@@ -17,7 +21,6 @@ const SingleMovie = ({ movie }) => {
 
         if (response.status === 200) {
           const castAndCrew = await response.json();
-          console.log(castAndCrew.cast);
           setActors(castAndCrew.cast);
           castAndCrew.crew.forEach((crew) => {
             if (crew.job === "Director") {
@@ -33,7 +36,53 @@ const SingleMovie = ({ movie }) => {
     getActorsAndDirector();
   }, []);
 
-  // console.log(directors);
+  useEffect(() => {
+    const getGenreAndDuration = async () => {
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/movie/${movie.id}?api_key=cd725d1c5efc50ead2110487dcd7be9e&language=en-US`
+        );
+
+        if (response.status === 200) {
+          const results = await response.json();
+          setGenres(results.genres);
+          setDuration(results.runtime);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getGenreAndDuration();
+  }, []);
+
+  useEffect(() => {
+    const getTrailer = async () => {
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=cd725d1c5efc50ead2110487dcd7be9e&language=en-US`
+        );
+
+        if (response.status === 200) {
+          const results = await response.json();
+
+          if (results.results.length > 1) {
+            const video = results.results.slice(0, 1);
+            setTrailer(video[0]);
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getTrailer();
+  }, []);
+
+  const removeFilmFromList = () => {
+    removeFromList(movie.id, movie.original_title);
+  };
+
   return (
     <React.Fragment>
       <div className={classes.movie__div}>
@@ -41,7 +90,7 @@ const SingleMovie = ({ movie }) => {
           <h4>Original Title: {movie.original_title}</h4>
 
           <i>
-            <FaTrash />
+            <FaTrash className="iconBtn" onClick={removeFilmFromList} />
           </i>
         </div>
         <div>
@@ -63,15 +112,31 @@ const SingleMovie = ({ movie }) => {
             <strong>Release Date: </strong>
             {movie.release_date}
           </p>
+          <p>Duration: {duration} mins.</p>
           <p>
             <strong>Rating: </strong>
             {movie.vote_average}
           </p>
         </div>
+        {genres.length > 0
+          ? genres.map((genre) => <Genres genre={genre.name} key={genre.id} />)
+          : null}
         <h3>Cast</h3>
         {actors.length > 0
           ? actors.map((actor) => <Actors actor={actor} key={actor.id} />)
           : null}
+        <div>
+          {trailer ? (
+            <div>
+              <iframe
+                width="420"
+                height="315"
+                title={movie.original_title}
+                src={`https://www.youtube.com/embed/${trailer.key}`}
+              ></iframe>
+            </div>
+          ) : null}
+        </div>
       </div>
     </React.Fragment>
   );

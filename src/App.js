@@ -10,7 +10,6 @@ function App() {
   const [movieData, setMovieData] = useState([]);
   const [previewClicked, setPreviewClicked] = useState(false);
   const [titleEditMode, setTitleEditMode] = useState(false);
-  const [actors, setActors] = useState();
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -30,21 +29,21 @@ function App() {
   }, [textFile]);
 
   const removeFromList = (title) => {
-    setMovieTitles(movieTitles.filter((movie) => movie !== title));
+    setMovieTitles(movieTitles.filter((movieTitle) => movieTitle !== title));
   };
 
   const onFilmsPreview = () => {
     setPreviewClicked(true);
-    movieTitles.forEach(async (movie) => {
+    movieTitles.forEach(async (title) => {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/search/multi?api_key=cd725d1c5efc50ead2110487dcd7be9e&language=en-US&page=1&include_adult=false&query=${movie}`
+          `https://api.themoviedb.org/3/search/multi?api_key=cd725d1c5efc50ead2110487dcd7be9e&language=en-US&page=1&include_adult=false&query=${title}`
         );
 
         if (response.status === 200) {
           const filmData = await response.json();
           let film = {
-            movie: movie,
+            title: title,
             filmData: filmData.results,
           };
           setMovieData((prevState) => [...prevState, film]);
@@ -59,7 +58,26 @@ function App() {
   const handleTitleEdit = () => {
     setTitleEditMode(true);
   };
-  // console.log(movieData);
+  //console.log(movieData);
+  //console.log(movieData[0].filmData[0].id);
+  const handleRemoveFromList = (movieId, movie) => {
+    // console.log(movieId);
+    // console.log(movieData);
+    // console.log(movie);
+    let updatedFilms;
+
+    movieData.forEach((film) => {
+      if (film.title === movie) {
+        //  console.log("YES");
+        updatedFilms = film.filmData.filter(
+          (fimlRes) => fimlRes.id !== movieId
+        );
+      }
+    });
+
+    console.log(updatedFilms);
+  };
+
   return (
     <React.Fragment>
       <div>
@@ -86,19 +104,22 @@ function App() {
             {movieData.length > 0
               ? movieData.map((movie) => (
                   <React.Fragment>
-                    <div className={classes.movie__title} key={movie.movie}>
+                    <div className={classes.movie__title} key={movie.title.id}>
                       {!titleEditMode ? (
                         <div>
-                          <h2>{movie.movie} </h2>
+                          <h2>{movie.title} </h2>
                           <i>
-                            <FaEdit onClick={handleTitleEdit} />
+                            <FaEdit
+                              className="iconBtn"
+                              onClick={handleTitleEdit}
+                            />
                           </i>
                         </div>
                       ) : (
                         <React.Fragment>
                           <input
-                            placeholder={movie.movie}
-                            key={movie.movie}
+                            placeholder={movie.title}
+                            key={movie.title}
                           ></input>
                           <button>Check again</button>
                         </React.Fragment>
@@ -108,7 +129,11 @@ function App() {
 
                     <div>
                       {movie.filmData.map((film) => (
-                        <SingleMovie movie={film} />
+                        <SingleMovie
+                          movie={film}
+                          key={film.id}
+                          removeFromList={handleRemoveFromList}
+                        />
                       ))}
                     </div>
                   </React.Fragment>
