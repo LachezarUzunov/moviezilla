@@ -74,15 +74,29 @@ function App() {
     setTitleEditMode(true);
   };
 
-  const handleRemoveFromList = (movieId, movie) => {
-    let updatedFilms;
-    movieData.forEach((film) => {
-      if (film.title === movie) {
-        updatedFilms = film.filmData.filter(
-          (fimlRes) => fimlRes.id !== movieId
-        );
-      }
-    });
+  const handleRemoveFromList = (
+    movieId,
+    movie,
+    index,
+    initialTitle,
+    movies
+  ) => {
+    //console.log(movies);
+    //console.log(initialTitle);
+    // console.log(index);
+    // console.log(movie);
+
+    const updatedFilms = movies.results.filter((el) => el.id !== movieId);
+    let newFilm = {
+      title: initialTitle,
+      results: updatedFilms,
+    };
+
+    console.log(movies);
+    movieData.splice(index, 1, newFilm);
+
+    console.log(movieData);
+    setMovieData((prevState) => [...movieData]);
   };
 
   console.log(movieData);
@@ -111,7 +125,7 @@ function App() {
                 ))
               : null}
             {movieData.length > 0
-              ? movieData.map((movie) => (
+              ? movieData.map((movie, index) => (
                   <React.Fragment>
                     <div className={classes.movie__title} key={movie.title.id}>
                       {!titleEditMode ? (
@@ -141,7 +155,10 @@ function App() {
                         <SingleMovie
                           movie={film}
                           key={film.id}
+                          index={index}
+                          initialTitle={movie.title}
                           removeFromList={handleRemoveFromList}
+                          movies={movie}
                         />
                       ))}
                     </div>

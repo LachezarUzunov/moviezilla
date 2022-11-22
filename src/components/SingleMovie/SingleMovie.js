@@ -5,12 +5,33 @@ import Actors from "./Actors";
 import Director from "./Director";
 import Genres from "./Genres";
 
-const SingleMovie = ({ movie, removeFromList }) => {
+const SingleMovie = ({
+  movie,
+  removeFromList,
+  index,
+  initialTitle,
+  movies,
+}) => {
   const [actors, setActors] = useState([]);
   const [directors, setDirectors] = useState([]);
   const [genres, setGenres] = useState([]);
   const [duration, setDuration] = useState();
   const [trailer, setTrailer] = useState();
+  const [allMovieDetails, setAllMovieDetails] = useState([
+    {
+      id: "",
+      title: "",
+      overview: "",
+      poster: "",
+      released: "",
+      rating: "",
+      actors: [],
+      directors: [],
+      genres: [],
+      duration: "",
+      trailer: "",
+    },
+  ]);
 
   useEffect(() => {
     const getActorsAndDirector = async () => {
@@ -80,7 +101,7 @@ const SingleMovie = ({ movie, removeFromList }) => {
   }, []);
 
   const removeFilmFromList = () => {
-    removeFromList(movie.id, movie.original_title);
+    removeFromList(movie.id, movie, index, initialTitle, movies);
   };
 
   return (
