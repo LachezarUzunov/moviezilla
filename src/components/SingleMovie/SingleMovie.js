@@ -144,7 +144,9 @@ const SingleMovie = ({
           : null}
         <h3>Cast</h3>
         {actors.length > 0
-          ? actors.map((actor) => <Actors actor={actor} key={actor.id} />)
+          ? actors
+              .slice(0, 10)
+              .map((actor) => <Actors actor={actor} key={actor.id} />)
           : null}
         <div>
           {trailer ? (

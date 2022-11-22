@@ -81,22 +81,14 @@ function App() {
     initialTitle,
     movies
   ) => {
-    //console.log(movies);
-    //console.log(initialTitle);
-    // console.log(index);
-    // console.log(movie);
-
     const updatedFilms = movies.results.filter((el) => el.id !== movieId);
     let newFilm = {
       title: initialTitle,
       results: updatedFilms,
     };
 
-    console.log(movies);
     movieData.splice(index, 1, newFilm);
-
-    console.log(movieData);
-    setMovieData((prevState) => [...movieData]);
+    setMovieData([...movieData]);
   };
 
   console.log(movieData);
@@ -106,10 +98,14 @@ function App() {
       <div>
         <div className={classes.header}>
           <h1 className={classes.header__title}>MOVIEZILLA</h1>
-          <h3>Where movie fanatics reside!</h3>
+          <h3 className={classes.header__subtitle}>
+            Where movie fanatics reside!
+          </h3>
         </div>
-        <h4> Upload your file here</h4>
-        <input type="file" onChange={handleFileUpload}></input>
+        <div className={classes.upload}>
+          <h4> Upload your file here</h4>
+          <input type="file" onChange={handleFileUpload}></input>
+        </div>
       </div>
       <div className={classes.movieList}>
         <div>
@@ -166,7 +162,6 @@ function App() {
                 ))
               : null}
           </div>
-          <div></div>
         </div>
         {!previewClicked ? (
           <button onClick={onFilmsPreview}>Preview All Films</button>

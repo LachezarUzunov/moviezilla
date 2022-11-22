@@ -33,7 +33,8 @@ code {
 }
 
 body {
-  background-image: url('../src/assets/dots-blue-blue.png');
+  background-image: url('../src/assets/scattered-golden-glitter-particles-background.jpg');
+  background-size: cover;
 }
 
 h1 {
