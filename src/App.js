@@ -42,11 +42,26 @@ function App() {
 
         if (response.status === 200) {
           const filmData = await response.json();
-          let film = {
-            title: title,
-            filmData: filmData.results,
-          };
-          setMovieData((prevState) => [...prevState, film]);
+          let data = [];
+          filmData.results.forEach((result) => {
+            let filmData = {
+              id: result.id,
+              title: result.original_title,
+              overview: result.overview,
+              poster: result.poster_path,
+              released: result.release_date,
+              rating: result.vote_average,
+            };
+            data.push(filmData);
+          });
+
+          setMovieData((prevState) => [
+            ...prevState,
+            {
+              title: title,
+              results: data,
+            },
+          ]);
         }
       } catch (error) {
         console.log(error);
@@ -58,25 +73,19 @@ function App() {
   const handleTitleEdit = () => {
     setTitleEditMode(true);
   };
-  //console.log(movieData);
-  //console.log(movieData[0].filmData[0].id);
-  const handleRemoveFromList = (movieId, movie) => {
-    // console.log(movieId);
-    // console.log(movieData);
-    // console.log(movie);
-    let updatedFilms;
 
+  const handleRemoveFromList = (movieId, movie) => {
+    let updatedFilms;
     movieData.forEach((film) => {
       if (film.title === movie) {
-        //  console.log("YES");
         updatedFilms = film.filmData.filter(
           (fimlRes) => fimlRes.id !== movieId
         );
       }
     });
-
-    console.log(updatedFilms);
   };
+
+  console.log(movieData);
 
   return (
     <React.Fragment>
@@ -128,7 +137,7 @@ function App() {
                     <h3>Results:</h3>
 
                     <div>
-                      {movie.filmData.map((film) => (
+                      {movie.results.map((film) => (
                         <SingleMovie
                           movie={film}
                           key={film.id}

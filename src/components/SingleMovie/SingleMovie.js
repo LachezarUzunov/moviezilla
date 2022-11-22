@@ -87,7 +87,7 @@ const SingleMovie = ({ movie, removeFromList }) => {
     <React.Fragment>
       <div className={classes.movie__div}>
         <div className={classes.movie__heading}>
-          <h4>Original Title: {movie.original_title}</h4>
+          <h4>Original Title: {movie.title}</h4>
 
           <i>
             <FaTrash className="iconBtn" onClick={removeFilmFromList} />
@@ -110,12 +110,12 @@ const SingleMovie = ({ movie, removeFromList }) => {
         <div>
           <p>
             <strong>Release Date: </strong>
-            {movie.release_date}
+            {movie.released}
           </p>
           <p>Duration: {duration} mins.</p>
           <p>
             <strong>Rating: </strong>
-            {movie.vote_average}
+            {movie.rating}
           </p>
         </div>
         {genres.length > 0
