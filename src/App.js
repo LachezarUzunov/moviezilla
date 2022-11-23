@@ -119,6 +119,7 @@ function App() {
     // }
     setMovieData([]);
     setUploadedFile(false);
+    setTextFile('')
     alert("SUCCESS");
   };
 
