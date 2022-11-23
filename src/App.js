@@ -19,6 +19,7 @@ function App() {
     reader.onload = () => {
       setTextFile(reader.result);
       setUploadedFile(true);
+    //  setPreviewClicked(false)
     };
   };
 
@@ -120,6 +121,7 @@ function App() {
     setMovieData([]);
     setUploadedFile(false);
     setTextFile('')
+    setPreviewClicked(false)
     alert("SUCCESS");
   };
 
