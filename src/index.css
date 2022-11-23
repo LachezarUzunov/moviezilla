@@ -147,3 +147,19 @@ p {
   color: yellow;
   font-family: 'Josefin Sans', sans-serif;
 }
+
+label {
+  color: black;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 2rem;
+  background-color: yellow;
+  padding: 1.2rem 4rem;
+  font-weight: 700;
+  border-radius: 25px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+input[type="file"] {
+  display: none;
+}

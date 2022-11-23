@@ -118,7 +118,7 @@ function App() {
     //   console.log(error)
     // }
     setMovieData([]);
-    setUploadedFile(false)
+    setUploadedFile(false);
     alert("SUCCESS");
   };
 
@@ -131,10 +131,10 @@ function App() {
             Where movie fanatics reside!
           </h3>
         </div>
-        <div className={classes.upload}>
-          <h4> Upload your file here</h4>
-          <input type="file" onChange={handleFileUpload}></input>
-        </div>
+        {!uploadedFile ? (<div className={classes.upload}>
+          <input type="file" id="file" onChange={handleFileUpload}></input>
+          <label htmlFor="file" id="file">Upload your movie list</label>
+        </div>) : null}
       </div>
       {uploadedFile ? (
         <div className={classes.movieList}>
