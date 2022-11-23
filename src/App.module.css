@@ -1,7 +1,9 @@
 .movieList {
-  background-color: steelblue;
-  padding: 2rem;
-  margin: 2rem 8rem;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 2rem 4rem;
+  margin: 2rem 14rem;
+  border-radius: 15px;
+  border: double 1px rgb(170, 255, 0);
 }
 
 .movie__title {
@@ -16,7 +18,7 @@
   align-items: center;
   gap: 2rem;
   padding: 3.2rem 0 2rem;
-  background-color: rgba(0, 0, 0, 0.601);
+  background-color: rgba(0, 0, 0, 0.501);
   color: yellow;
 }
 

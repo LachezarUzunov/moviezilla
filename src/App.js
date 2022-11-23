@@ -10,6 +10,7 @@ function App() {
   const [movieData, setMovieData] = useState([]);
   const [previewClicked, setPreviewClicked] = useState(false);
   const [titleEditMode, setTitleEditMode] = useState(false);
+  const [uploadedFile, setUploadedFile] = useState(false);
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -17,6 +18,7 @@ function App() {
     reader.readAsText(file);
     reader.onload = () => {
       setTextFile(reader.result);
+      setUploadedFile(true);
     };
   };
 
@@ -107,7 +109,7 @@ function App() {
           <input type="file" onChange={handleFileUpload}></input>
         </div>
       </div>
-      <div className={classes.movieList}>
+      {uploadedFile ? (<div className={classes.movieList}>
         <div>
           <div>
             {movieTitles.length > 0
@@ -125,8 +127,8 @@ function App() {
                   <React.Fragment>
                     <div className={classes.movie__title} key={movie.title.id}>
                       {!titleEditMode ? (
-                        <div>
-                          <h2>{movie.title} </h2>
+                        <div key={movie.title.id}>
+                          <h2>{movie.title}</h2>
                           <i>
                             <FaEdit
                               className="iconBtn"
@@ -135,13 +137,10 @@ function App() {
                           </i>
                         </div>
                       ) : (
-                        <React.Fragment>
-                          <input
-                            placeholder={movie.title}
-                            key={movie.title}
-                          ></input>
+                        <div key={movie.title.id}>
+                          <input placeholder={movie.title}></input>
                           <button>Check again</button>
-                        </React.Fragment>
+                        </div>
                       )}
                     </div>
                     <h3>Results:</h3>
@@ -167,7 +166,7 @@ function App() {
           <button onClick={onFilmsPreview}>Preview All Films</button>
         ) : null}
         {previewClicked ? <button>Save</button> : null}
-      </div>
+      </div>) : null}
     </React.Fragment>
   );
 }

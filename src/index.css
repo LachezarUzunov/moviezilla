@@ -39,9 +39,15 @@ body {
 
 h1 {
   font-family: 'Monoton', cursive;
-  font-size: 6rem;
+  font-size: 4rem;
 }
 
 .iconBtn {
   cursor: pointer;
+}
+
+p {
+  font-family: 'Kanit', sans-serif;
+  letter-spacing: 1px;
+  font-size: 18px;
 }
