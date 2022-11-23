@@ -142,8 +142,8 @@ function App() {
                           </div>
                         ) : (
                           <div key={movie.title.id}>
-                            <input placeholder={movie.title}></input>
-                            <button>Check again</button>
+                            <input className="genInput" placeholder={movie.title}></input>
+                            <button className="btn__primary">Check again</button>
                           </div>
                         )}
                       </div>
@@ -166,9 +166,9 @@ function App() {
             </div>
           </div>
           {!previewClicked ? (
-            <button onClick={onFilmsPreview}>Preview All Films</button>
+            <button className="btn__primary" onClick={onFilmsPreview}>Preview All Films</button>
           ) : null}
-          {previewClicked ? <button>Save</button> : null}
+          {previewClicked ? <button className="btn__primary">Save</button> : null}
         </div>
       ) : null}
     </React.Fragment>

@@ -15,7 +15,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-
 *,
 *::before,
 *::after {
@@ -52,8 +51,6 @@ h3 {
   margin-top: 1rem;
   margin-bottom: 0.6rem;
   font-family: 'Permanent Marker', cursive;
-  /* font-family: 'Marhey', cursive; */
-  /* font-family: 'Josefin Sans', sans-serif; */
 }
 
 h4 {
@@ -98,7 +95,55 @@ p {
   color: yellow;
 }
 
-.button {
-  color: rgb(222, 24, 24);
+.btn__primary {
+  display: block;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1.6rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  padding: 0.8rem;
+  width: 100%;
+  background-color: yellow;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  transition: 0.2s ease-in-out;
+}
+
+.btn__primary:hover {
+  background-color: rgb(201, 201, 0);
   cursor: pointer;
+}
+
+.btn__primary:focus {
+  background-color: rgb(146, 146, 3);
+}
+
+.genInput {
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  height: 2.5rem;
+  transition: 0.2s ease-in-out;
+  background-color: rgb(50, 49, 49);
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  color: yellow;
+  font-size: 22px;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.genInput:focus {
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  height: 3rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  caret-color: white;
+  color: yellow;
+  font-family: 'Josefin Sans', sans-serif;
 }

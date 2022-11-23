@@ -108,9 +108,11 @@ const SingleMovie = ({
     <section className={classes.movies__results}>
       <div className={classes.movie__div}>
         <div className={classes.movie__heading}>
-          <h3>Original Title: {movie.title}</h3>
+          <h3>
+            Original Title: <p>{movie.title}</p>
+          </h3>
 
-          <i>
+          <i children={classes.trash__btn}>
             <FaTrash className="iconBtn" onClick={removeFilmFromList} />
           </i>
         </div>
@@ -151,12 +153,15 @@ const SingleMovie = ({
         <div>
           {trailer ? (
             <div>
-              <iframe
-                width="420"
-                height="315"
-                title={movie.original_title}
-                src={`https://www.youtube.com/embed/${trailer.key}`}
-              ></iframe>
+              <h3>Trailer</h3>
+              <div className={classes.trailer}>
+                <iframe
+                  width="420"
+                  height="315"
+                  title={movie.original_title}
+                  src={`https://www.youtube.com/embed/${trailer.key}`}
+                ></iframe>
+              </div>
             </div>
           ) : null}
         </div>

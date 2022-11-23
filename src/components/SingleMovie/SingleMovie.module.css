@@ -12,3 +12,13 @@
     align-items: center;
     gap: 1.2rem;
 }
+
+.trash__btn {
+    display: flex;
+    align-items: center;
+}
+
+.trailer {
+    display: flex;
+    justify-content: center;
+}
