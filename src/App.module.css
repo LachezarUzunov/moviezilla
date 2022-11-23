@@ -1,5 +1,5 @@
 .movieList {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.6);
   padding: 2rem 4rem;
   margin: 2rem 14rem;
   border-radius: 15px;
@@ -7,9 +7,14 @@
 }
 
 .movie__title {
-  background-color: darkblue;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2rem;
+  margin: 0.4rem 0;
+  align-items: center;
   padding: 1rem;
-  color: white;
+  color: yellow;
 }
 
 .header {
@@ -33,11 +38,6 @@
   font-size: 2rem;
 }
 
-.movie__title {
-  background-color: blue;
-  margin: 1rem;
-}
-
 .upload {
   display: flex;
   justify-content: center;
@@ -46,5 +46,7 @@
 .upload > h4 {
   color: white;
 }
+
+
 
 

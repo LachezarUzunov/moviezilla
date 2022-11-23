@@ -1,7 +1,11 @@
-.movie__div {
-    background-color: aqua;
-    margin: 1rem;
-}
+.movies__results {
+    border-bottom: 2px solid yellowgreen;
+    background-color: rgb(50, 49, 49, 0.6);
+    margin: 0 1rem 2rem 1rem;
+    padding: 2rem;
+    border-radius: 25px;
+
+  }
 
 .movie__heading {
     display: flex;

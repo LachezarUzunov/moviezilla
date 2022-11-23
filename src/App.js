@@ -109,64 +109,68 @@ function App() {
           <input type="file" onChange={handleFileUpload}></input>
         </div>
       </div>
-      {uploadedFile ? (<div className={classes.movieList}>
-        <div>
+      {uploadedFile ? (
+        <div className={classes.movieList}>
           <div>
-            {movieTitles.length > 0
-              ? movieTitles.map((title, index) => (
-                  <SingleTitle
-                    key={title}
-                    title={title}
-                    index={index}
-                    removeFromList={removeFromList}
-                  />
-                ))
-              : null}
-            {movieData.length > 0
-              ? movieData.map((movie, index) => (
-                  <React.Fragment>
-                    <div className={classes.movie__title} key={movie.title.id}>
-                      {!titleEditMode ? (
-                        <div key={movie.title.id}>
-                          <h2>{movie.title}</h2>
-                          <i>
-                            <FaEdit
-                              className="iconBtn"
-                              onClick={handleTitleEdit}
-                            />
-                          </i>
-                        </div>
-                      ) : (
-                        <div key={movie.title.id}>
-                          <input placeholder={movie.title}></input>
-                          <button>Check again</button>
-                        </div>
-                      )}
-                    </div>
-                    <h3>Results:</h3>
+            <div>
+              {movieTitles.length > 0
+                ? movieTitles.map((title, index) => (
+                    <SingleTitle
+                      key={title}
+                      title={title}
+                      index={index}
+                      removeFromList={removeFromList}
+                    />
+                  ))
+                : null}
+              {movieData.length > 0
+                ? movieData.map((movie, index) => (
+                    <section key={movie.title.id}>
+                      <div key={movie.title.id}>
+                        {!titleEditMode ? (
+                          <div
+                            key={movie.title.id}
+                            className={classes.movie__title}
+                          >
+                            <h2>{movie.title}</h2>
+                            <i>
+                              <FaEdit
+                                className="iconBtn__second"
+                                onClick={handleTitleEdit}
+                              />
+                            </i>
+                          </div>
+                        ) : (
+                          <div key={movie.title.id}>
+                            <input placeholder={movie.title}></input>
+                            <button>Check again</button>
+                          </div>
+                        )}
+                      </div>
 
-                    <div>
-                      {movie.results.map((film) => (
-                        <SingleMovie
-                          movie={film}
-                          key={film.id}
-                          index={index}
-                          initialTitle={movie.title}
-                          removeFromList={handleRemoveFromList}
-                          movies={movie}
-                        />
-                      ))}
-                    </div>
-                  </React.Fragment>
-                ))
-              : null}
+                      <div>
+                        {movie.results.map((film) => (
+                          <SingleMovie
+                            movie={film}
+                            key={film.id}
+                            index={index}
+                            initialTitle={movie.title}
+                            removeFromList={handleRemoveFromList}
+                            movies={movie}
+                          />
+                        ))}
+                      </div>
+                    </section>
+                  ))
+                : null}
+            </div>
           </div>
+          {!previewClicked ? (
+            <button onClick={onFilmsPreview}>Preview All Films</button>
+          ) : null}
+          {previewClicked ? <button>Save</button> : null}
         </div>
-        {!previewClicked ? (
-          <button onClick={onFilmsPreview}>Preview All Films</button>
-        ) : null}
-        {previewClicked ? <button>Save</button> : null}
-      </div>) : null}
+      ) : null}
     </React.Fragment>
   );
 }

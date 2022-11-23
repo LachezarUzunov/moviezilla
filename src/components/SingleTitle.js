@@ -13,8 +13,8 @@ const SingleTitle = ({ title, removeFromList, index }) => {
         <p>
           {index + 1}. {title}
         </p>
-        <i className={classes.button}>
-          <FaTrash className="iconBtns" onClick={onDelete} />
+        <i>
+          <FaTrash className="iconBtn" onClick={onDelete} />
         </i>
       </div>
     </React.Fragment>

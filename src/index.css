@@ -15,10 +15,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
 
 *,
 *::before,
@@ -42,12 +38,67 @@ h1 {
   font-size: 4rem;
 }
 
+h2 {
+  color: yellow;
+  font-size: 2rem;
+  text-transform: uppercase;
+  text-decoration: underline;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+h3 {
+  color: yellow;
+  font-size: 1.4rem;
+  margin-top: 1rem;
+  margin-bottom: 0.6rem;
+  font-family: 'Permanent Marker', cursive;
+  /* font-family: 'Marhey', cursive; */
+  /* font-family: 'Josefin Sans', sans-serif; */
+}
+
+h4 {
+    font-family: 'Josefin Sans', sans-serif;
+    letter-spacing: 1px;
+    font-size: 18px;
+    color:aliceblue;
+    display: inline;
+}
+
 .iconBtn {
+  color: rgb(222, 24, 24);
   cursor: pointer;
 }
 
+.iconBtn__second {
+  color: rgb(170, 255, 0);
+  cursor: pointer;
+  font-size: 1.4rem;
+}
+
 p {
-  font-family: 'Kanit', sans-serif;
+  font-family: 'Josefin Sans', sans-serif;
   letter-spacing: 1px;
   font-size: 18px;
+  color:aliceblue;
+}
+
+.movies__section {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(50, 49, 49);
+  margin-top: 1rem;
+  padding: 1rem;
+  gap: 1.2rem;
+  align-items: center;
+  border-radius: 15px;
+  justify-content: space-between;
+}
+
+.movie__title_div > p {
+  color: yellow;
+}
+
+.button {
+  color: rgb(222, 24, 24);
+  cursor: pointer;
 }

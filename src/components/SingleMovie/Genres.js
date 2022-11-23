@@ -1,11 +1,7 @@
 import React from "react";
 
 const Genres = ({ genre }) => {
-  return (
-    <div>
-      <p>{genre}</p>
-    </div>
-  );
+  return <p>{genre}</p>;
 };
 
 export default Genres;

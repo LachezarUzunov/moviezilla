@@ -105,10 +105,10 @@ const SingleMovie = ({
   };
 
   return (
-    <React.Fragment>
+    <section className={classes.movies__results}>
       <div className={classes.movie__div}>
         <div className={classes.movie__heading}>
-          <h4>Original Title: {movie.title}</h4>
+          <h3>Original Title: {movie.title}</h3>
 
           <i>
             <FaTrash className="iconBtn" onClick={removeFilmFromList} />
@@ -125,20 +125,20 @@ const SingleMovie = ({
           </div>
         </div>
         <div>
-          <h4>Overview:</h4>
+          <h3>Plot:</h3>
           <p>{movie.overview}</p>
         </div>
         <div>
-          <p>
-            <strong>Release Date: </strong>
-            {movie.released}
-          </p>
-          <p>Duration: {duration} mins.</p>
-          <p>
-            <strong>Rating: </strong>
-            {movie.rating}
-          </p>
+          <h3>Release Date</h3>
+          <p>{movie.released}</p>
         </div>
+        <div>
+          <h3>Duration: {duration} mins.</h3>
+        </div>
+        <div>
+          <h3>Rating: {movie.rating}</h3>
+        </div>
+        <h3>Genres</h3>
         {genres.length > 0
           ? genres.map((genre) => <Genres genre={genre.name} key={genre.id} />)
           : null}
@@ -161,7 +161,7 @@ const SingleMovie = ({
           ) : null}
         </div>
       </div>
-    </React.Fragment>
+    </section>
   );
 };
 
