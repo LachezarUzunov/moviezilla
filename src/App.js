@@ -34,8 +34,9 @@ function App() {
     setMovieTitles(movieTitles.filter((movieTitle) => movieTitle !== title));
   };
 
-  const onFilmsPreview = () => {
+  const onFilmsPreview = async () => {
     setPreviewClicked(true);
+
     movieTitles.forEach(async (title) => {
       try {
         const response = await fetch(
@@ -95,6 +96,32 @@ function App() {
 
   console.log(movieData);
 
+  const saveList = async () => {
+    // SAVING FILMS TO DATABASES
+
+    // try {
+    //   const res = await fetch(
+    //     `http://localhost:5000/api/post`,
+    //     {
+    //       method: "POST",
+    //       body: movieData,
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   );
+
+    //   if (res.status === 201) {
+    //     alert("Success");
+    //   }
+    // } catch (error) {
+    //   console.log(error)
+    // }
+    setMovieData([]);
+    setUploadedFile(false)
+    alert("SUCCESS");
+  };
+
   return (
     <React.Fragment>
       <div>
@@ -142,8 +169,13 @@ function App() {
                           </div>
                         ) : (
                           <div key={movie.title.id}>
-                            <input className="genInput" placeholder={movie.title}></input>
-                            <button className="btn__primary">Check again</button>
+                            <input
+                              className="genInput"
+                              placeholder={movie.title}
+                            ></input>
+                            <button className="btn__primary">
+                              Check again
+                            </button>
                           </div>
                         )}
                       </div>
@@ -166,9 +198,15 @@ function App() {
             </div>
           </div>
           {!previewClicked ? (
-            <button className="btn__primary" onClick={onFilmsPreview}>Preview All Films</button>
+            <button className="btn__primary" onClick={onFilmsPreview}>
+              Preview All Films
+            </button>
           ) : null}
-          {previewClicked ? <button className="btn__primary">Save</button> : null}
+          {previewClicked ? (
+            <button className="btn__primary" onClick={saveList}>
+              Save
+            </button>
+          ) : null}
         </div>
       ) : null}
     </React.Fragment>
