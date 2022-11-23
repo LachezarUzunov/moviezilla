@@ -6,17 +6,6 @@
   border: double 1px rgb(170, 255, 0);
 }
 
-.movie__title {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 2rem;
-  margin: 0.4rem 0;
-  align-items: center;
-  padding: 1rem;
-  color: yellow;
-}
-
 .header {
   display: flex;
   flex-direction: column;

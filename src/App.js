@@ -3,13 +3,13 @@ import classes from "./App.module.css";
 import SingleTitle from "./components/SingleTitle";
 import SingleMovie from "./components/SingleMovie/SingleMovie";
 import { FaEdit } from "react-icons/fa";
+import MovieHeading from "./components/SingleMovie/MovieHeading";
 
 function App() {
   const [textFile, setTextFile] = useState("");
   const [movieTitles, setMovieTitles] = useState([]);
   const [movieData, setMovieData] = useState([]);
   const [previewClicked, setPreviewClicked] = useState(false);
-  const [titleEditMode, setTitleEditMode] = useState(false);
   const [uploadedFile, setUploadedFile] = useState(false);
 
   const handleFileUpload = (e) => {
@@ -19,7 +19,6 @@ function App() {
     reader.onload = () => {
       setTextFile(reader.result);
       setUploadedFile(true);
-    //  setPreviewClicked(false)
     };
   };
 
@@ -74,10 +73,6 @@ function App() {
     });
   };
 
-  const handleTitleEdit = () => {
-    setTitleEditMode(true);
-  };
-
   const handleRemoveFromList = (
     movieId,
     movie,
@@ -120,8 +115,8 @@ function App() {
     // }
     setMovieData([]);
     setUploadedFile(false);
-    setTextFile('')
-    setPreviewClicked(false)
+    setTextFile("");
+    setPreviewClicked(false);
     alert("SUCCESS");
   };
 
@@ -134,10 +129,14 @@ function App() {
             Where movie fanatics reside!
           </h3>
         </div>
-        {!uploadedFile ? (<div className={classes.upload}>
-          <input type="file" id="file" onChange={handleFileUpload}></input>
-          <label htmlFor="file" id="file">Upload your movie list</label>
-        </div>) : null}
+        {!uploadedFile ? (
+          <div className={classes.upload}>
+            <input type="file" id="file" onChange={handleFileUpload}></input>
+            <label htmlFor="file" id="file">
+              Upload your movie list
+            </label>
+          </div>
+        ) : null}
       </div>
       {uploadedFile ? (
         <div className={classes.movieList}>
@@ -155,32 +154,9 @@ function App() {
                 : null}
               {movieData.length > 0
                 ? movieData.map((movie, index) => (
-                    <section key={movie.title.id}>
-                      <div key={movie.title.id}>
-                        {!titleEditMode ? (
-                          <div
-                            key={movie.title.id}
-                            className={classes.movie__title}
-                          >
-                            <h2>{movie.title}</h2>
-                            <i>
-                              <FaEdit
-                                className="iconBtn__second"
-                                onClick={handleTitleEdit}
-                              />
-                            </i>
-                          </div>
-                        ) : (
-                          <div key={movie.title.id}>
-                            <input
-                              className="genInput"
-                              placeholder={movie.title}
-                            ></input>
-                            <button className="btn__primary">
-                              Check again
-                            </button>
-                          </div>
-                        )}
+                    <section key={movie.title}>
+                      <div>
+                        <MovieHeading movie={movie} />
                       </div>
 
                       <div>
