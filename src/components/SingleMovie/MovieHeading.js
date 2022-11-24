@@ -2,10 +2,23 @@ import React, { useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import classes from "./MovieHeading.module.css";
 
-const MovieHeading = ({ movie }) => {
+const MovieHeading = ({ movie, singleMovieSearch }) => {
   const [titleEditMode, setTitleEditMode] = useState(false);
+  const [newMovieTitle, setNewMovieTitle] = useState("");
+
   const handleEditClick = () => {
     setTitleEditMode(true);
+  };
+
+  const onSearchSubmit = () => {
+    singleMovieSearch(newMovieTitle);
+
+
+  };
+
+  const handleInput = (e) => {
+    e.preventDefault();
+    setNewMovieTitle(e.target.value);
   };
   return (
     <div>
@@ -18,8 +31,16 @@ const MovieHeading = ({ movie }) => {
         </div>
       ) : (
         <div>
-          <input className="genInput" placeholder={movie.title}></input>
-          <button className="btn__primary">Check again</button>
+          <input
+            className="genInput"
+            placeholder={movie.title}
+            type="text"
+            onChange={handleInput}
+            value={newMovieTitle}
+          ></input>
+          <button className="btn__primary" onClick={onSearchSubmit}>
+            Check again
+          </button>
         </div>
       )}
     </div>

@@ -73,13 +73,7 @@ function App() {
     });
   };
 
-  const handleRemoveFromList = (
-    movieId,
-    movie,
-    index,
-    initialTitle,
-    movies
-  ) => {
+  const handleRemoveFromList = (movieId, index, initialTitle, movies) => {
     const updatedFilms = movies.results.filter((el) => el.id !== movieId);
     let newFilm = {
       title: initialTitle,
@@ -91,6 +85,36 @@ function App() {
   };
 
   console.log(movieData);
+
+  const onSingleMovieSearch = async (newMovieTitle) => {
+    console.log("yes");
+    console.log(newMovieTitle);
+
+    try {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/search/movie?api_key=cd725d1c5efc50ead2110487dcd7be9e&language=en-US&page=1&include_adult=false&query=${newMovieTitle}`
+      );
+
+      if (res.status === 200) {
+        const filmSearch = await res.json();
+        let searchData = [];
+
+        filmSearch.results.forEach((result) => {
+          let filmData = {
+            id: result.id,
+            title: result.original_title,
+            overview: result.overview,
+            poster: result.poster_path,
+            released: result.release_date,
+            rating: result.vote_average,
+          };
+          searchData.push(filmData);
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const saveList = async () => {
     // SAVING FILMS TO DATABASES
@@ -156,7 +180,10 @@ function App() {
                 ? movieData.map((movie, index) => (
                     <section key={movie.title}>
                       <div>
-                        <MovieHeading movie={movie} />
+                        <MovieHeading
+                          movie={movie}
+                          singleMovieSearch={onSingleMovieSearch}
+                        />
                       </div>
 
                       <div>
