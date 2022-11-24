@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { AiFillCloseCircle } from "react-icons/ai";
 import { FaEdit } from "react-icons/fa";
 import classes from "./MovieHeading.module.css";
 
@@ -10,10 +11,12 @@ const MovieHeading = ({ movie, singleMovieSearch, index }) => {
     setTitleEditMode(true);
   };
 
+  const handleCloseInput = () => {
+    setTitleEditMode(false);
+  };
+
   const onSearchSubmit = () => {
     singleMovieSearch(newMovieTitle, index, movie);
-
-
   };
 
   const handleInput = (e) => {
@@ -38,6 +41,12 @@ const MovieHeading = ({ movie, singleMovieSearch, index }) => {
             onChange={handleInput}
             value={newMovieTitle}
           ></input>
+          <i className={classes.close__icon}>
+            <AiFillCloseCircle
+              className={classes.close__iconBtn}
+              onClick={handleCloseInput}
+            />
+          </i>
           <button className="btn__primary" onClick={onSearchSubmit}>
             Check again
           </button>

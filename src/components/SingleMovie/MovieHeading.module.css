@@ -8,3 +8,14 @@
     padding: 1rem;
     color: yellow;
   }
+
+  .close__icon {
+    display: flex;
+    justify-content: center;
+  }
+
+  .close__iconBtn {
+    font-size: 3rem;
+    color: red;
+    cursor: pointer;
+  }
