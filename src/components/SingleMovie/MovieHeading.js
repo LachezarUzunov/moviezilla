@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import classes from "./MovieHeading.module.css";
 
-const MovieHeading = ({ movie, singleMovieSearch }) => {
+const MovieHeading = ({ movie, singleMovieSearch, index }) => {
   const [titleEditMode, setTitleEditMode] = useState(false);
   const [newMovieTitle, setNewMovieTitle] = useState("");
 
@@ -11,7 +11,7 @@ const MovieHeading = ({ movie, singleMovieSearch }) => {
   };
 
   const onSearchSubmit = () => {
-    singleMovieSearch(newMovieTitle);
+    singleMovieSearch(newMovieTitle, index, movie);
 
 
   };

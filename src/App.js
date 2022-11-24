@@ -73,7 +73,12 @@ function App() {
     });
   };
 
-  const handleRemoveFromList = (movieId, index, initialTitle, movies) => {
+  const handleRemoveFromList = (
+    movieId,
+    index,
+    initialTitle,
+    movies
+  ) => {
     const updatedFilms = movies.results.filter((el) => el.id !== movieId);
     let newFilm = {
       title: initialTitle,
@@ -84,11 +89,11 @@ function App() {
     setMovieData([...movieData]);
   };
 
-  console.log(movieData);
+  //console.log(movieData);
 
-  const onSingleMovieSearch = async (newMovieTitle) => {
-    console.log("yes");
-    console.log(newMovieTitle);
+  const onSingleMovieSearch = async (newMovieTitle, index, movie) => {
+    console.log(index);
+    console.log(movie);
 
     try {
       const res = await fetch(
@@ -110,6 +115,11 @@ function App() {
           };
           searchData.push(filmData);
         });
+        const newFilm = {
+          title: newMovieTitle,
+          results: searchData,
+        };
+        console.log(newFilm);
       }
     } catch (error) {
       console.log(error);
@@ -182,6 +192,7 @@ function App() {
                       <div>
                         <MovieHeading
                           movie={movie}
+                          index={index}
                           singleMovieSearch={onSingleMovieSearch}
                         />
                       </div>

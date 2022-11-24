@@ -101,7 +101,7 @@ const SingleMovie = ({
   }, []);
 
   const removeFilmFromList = () => {
-    removeFromList(movie.id, movie, index, initialTitle, movies);
+    removeFromList(movie.id, index, initialTitle, movies);
   };
 
   return (
