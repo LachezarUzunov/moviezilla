@@ -73,12 +73,7 @@ function App() {
     });
   };
 
-  const handleRemoveFromList = (
-    movieId,
-    index,
-    initialTitle,
-    movies
-  ) => {
+  const handleRemoveFromList = (movieId, index, initialTitle, movies) => {
     const updatedFilms = movies.results.filter((el) => el.id !== movieId);
     let newFilm = {
       title: initialTitle,
@@ -119,7 +114,9 @@ function App() {
           title: newMovieTitle,
           results: searchData,
         };
-        console.log(newFilm);
+        movieData.splice(index, 1, newFilm);
+        setMovieData([...movieData]);
+        //console.log(newFilm);
       }
     } catch (error) {
       console.log(error);
