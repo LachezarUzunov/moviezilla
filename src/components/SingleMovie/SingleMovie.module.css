@@ -22,3 +22,16 @@
     display: flex;
     justify-content: center;
 }
+
+@media screen and (max-width:1200px) {
+    .movies__results {
+        margin: 0 0 2rem 0;
+    }
+}
+
+@media screen and (max-width:400px) {
+    .movies__results {
+        margin: 0 0 2rem 0;
+        padding: 1rem;
+    }
+}

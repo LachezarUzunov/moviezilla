@@ -36,6 +36,28 @@
   color: white;
 }
 
+@media screen and (max-width:1200px) {
+ 
+  .movieList {
+    margin: 2rem 4rem;
+  }
 
+}
 
+@media screen and (max-width:400px) {
+  .header {
+    gap: 1rem;
+    padding: 2rem 0 1rem;
+  }
+  .movieList {
+    margin: 1rem 1rem;
+    padding: 1rem 1rem;
+    border-left:  1px rgb(170, 255, 0);
+    border-right: 1px rgb(170, 255, 0);
+  }
+  .header__subtitle {
+    letter-spacing: 0.2rem;
+    font-size: 1rem;
+  }
+}
 

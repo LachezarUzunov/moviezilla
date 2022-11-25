@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import classes from "./App.module.css";
 import SingleTitle from "./components/SingleTitle";
 import SingleMovie from "./components/SingleMovie/SingleMovie";
-import { FaEdit } from "react-icons/fa";
 import MovieHeading from "./components/SingleMovie/MovieHeading";
 
 function App() {
@@ -84,8 +83,6 @@ function App() {
     setMovieData([...movieData]);
   };
 
-  //console.log(movieData);
-
   const onSingleMovieSearch = async (newMovieTitle, index, movie) => {
     console.log(index);
     console.log(movie);
@@ -116,7 +113,6 @@ function App() {
         };
         movieData.splice(index, 1, newFilm);
         setMovieData([...movieData]);
-        //console.log(newFilm);
       }
     } catch (error) {
       console.log(error);

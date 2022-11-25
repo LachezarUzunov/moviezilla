@@ -19,3 +19,9 @@
     color: red;
     cursor: pointer;
   }
+
+@media screen and (max-width:400px) {
+  .close__iconBtn {
+    font-size: 2rem;
+  }
+}

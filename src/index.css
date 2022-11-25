@@ -163,3 +163,55 @@ label {
 input[type="file"] {
   display: none;
 }
+
+@media screen and (max-width:1200px) {
+
+
+}
+
+@media screen and (max-width:400px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.2rem;
+  }
+  
+  h3 {
+    font-size: 1rem;
+    margin-top: .8rem;
+    margin-bottom: .4rem;
+  }
+  
+  h4 {
+      font-size: 14px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1rem;
+    margin-top: 2rem;
+  }
+
+  .genInput {
+    height: 2.2rem;
+    font-size: 18px;
+  }
+  
+  .genInput:focus {
+    height: 2.6rem;
+  }
+
+  .btn__primary {
+    font-size: 1.2rem;
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+    padding: 0.6rem;
+    font-weight: 600;
+  }
+}
