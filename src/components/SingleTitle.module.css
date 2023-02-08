@@ -1,0 +1,14 @@
+.titleDiv {
+  display: flex;
+  background-color: rgb(50, 49, 49, 0.8);
+  margin-top: 1rem;
+  padding: 1rem;
+  gap: 1.2rem;
+  align-items: center;
+  border-radius: 15px;
+  justify-content: space-between;
+}
+
+.titleDiv > p {
+  color: yellow;
+}

@@ -1,0 +1,27 @@
+.movie__title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+    margin: 0.4rem 0;
+    align-items: center;
+    padding: 1rem;
+    color: yellow;
+  }
+
+  .close__icon {
+    display: flex;
+    justify-content: center;
+  }
+
+  .close__iconBtn {
+    font-size: 3rem;
+    color: red;
+    cursor: pointer;
+  }
+
+@media screen and (max-width:400px) {
+  .close__iconBtn {
+    font-size: 2rem;
+  }
+}

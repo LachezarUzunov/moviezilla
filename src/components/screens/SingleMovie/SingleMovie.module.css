@@ -1,0 +1,37 @@
+.movies__results {
+    border-bottom: 2px solid yellowgreen;
+    background-color: rgb(50, 49, 49, 0.6);
+    margin: 0 1rem 2rem 1rem;
+    padding: 2rem;
+    border-radius: 25px;
+
+  }
+
+.movie__heading {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.trash__btn {
+    display: flex;
+    align-items: center;
+}
+
+.trailer {
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width:1200px) {
+    .movies__results {
+        margin: 0 0 2rem 0;
+    }
+}
+
+@media screen and (max-width:400px) {
+    .movies__results {
+        margin: 0 0 2rem 0;
+        padding: 1rem;
+    }
+}
