@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { register } from "../../features/auth/authSlice";
+import { register, reset } from "../../features/auth/authSlice";
 import classes from "./Register.module.css";
 import { toast } from "react-toastify";
 
@@ -12,10 +13,24 @@ const Register = () => {
     repass: "",
   });
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const { user, isLoading, isSuccess, message } = useSelector(
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    // Redirect when registration is successful
+    if (isSuccess && user) {
+      navigate("/");
+    }
+
+    dispatch(reset());
+  }, [isError, isSuccess, user, message, dispatch, navigate]);
 
   const { name, email, pass, repass } = formData;
 
