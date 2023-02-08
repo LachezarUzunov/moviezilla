@@ -1,11 +1,24 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { logout, reset } from "../../features/auth/authSlice";
 import classes from "./MainNavigation.module.css";
-import { Link } from "react-router-dom";
+
 import { ImMenu } from "react-icons/im";
 import { FaWindowClose } from "react-icons/fa";
 
 const MainNavigation = () => {
   const [openMobile, setOpenMobile] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.auth);
+
+  const onLogout = () => {
+    dispatch(logout());
+    dispatch(reset());
+    navigate("/");
+  };
 
   return (
     <nav>
@@ -31,35 +44,27 @@ const MainNavigation = () => {
             Home
           </Link>
         </li>
-        <li>
-          <Link className={classes.link} to="/register">
-            Register
-          </Link>
-        </li>
-        <li>
-          <Link className={classes.link} to="/login">
-            Login
-          </Link>
-        </li>
+        {user ? (
+          <li>
+            <button onClick={onLogout} className={classes.link}>
+              Logout
+            </button>
+          </li>
+        ) : (
+          <React.Fragment>
+            <li>
+              <Link className={classes.link} to="/register">
+                Register
+              </Link>
+            </li>
+            <li>
+              <Link className={classes.link} to="/login">
+                Login
+              </Link>
+            </li>
+          </React.Fragment>
+        )}
       </ul>
-
-      {/* <ul className={classes.nav}>
-        <li>
-          <Link className={classes.link} to="/">
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link className={classes.link} to="/register">
-            Register
-          </Link>
-        </li>
-        <li>
-          <Link className={classes.link} to="/login">
-            Login
-          </Link>
-        </li>
-      </ul> */}
     </nav>
   );
 };
