@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import classes from "./Home.module.css";
 import SingleMovie from "../SingleMovie/SingleMovie";
 import SingleTitle from "../../SingleTitle";
@@ -12,6 +14,11 @@ const Home = () => {
   const [previewClicked, setPreviewClicked] = useState(false);
   const [searched, setSearched] = useState(false);
   const [inputSearch, setInputSearch] = useState("");
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.auth);
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -288,9 +295,9 @@ const Home = () => {
               Preview All Films
             </button>
           ) : null}
-          {previewClicked ? (
+          {previewClicked && user ? (
             <button className="btn__primary" onClick={saveList}>
-              Save
+              Save to watchlist
             </button>
           ) : null}
         </div>

@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { register, reset } from "../../features/auth/authSlice";
 import classes from "./Register.module.css";
 import { toast } from "react-toastify";
+import Loader from "../layout/Loader";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -67,6 +68,8 @@ const Register = () => {
 
     dispatch(register(userData));
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <section className={`main ${classes.card}`}>

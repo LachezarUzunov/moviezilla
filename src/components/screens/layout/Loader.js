@@ -1,9 +1,11 @@
 import React from "react";
+import classes from "./Loader.module.css";
+import spinner from "../../../assets/Eclipse-1s-200px.gif";
 
 const Loader = () => {
   return (
-    <div>
-      <h1>Loading</h1>
+    <div className={classes.center}>
+      <img width={180} src={spinner} alt="Loading..." />
     </div>
   );
 };

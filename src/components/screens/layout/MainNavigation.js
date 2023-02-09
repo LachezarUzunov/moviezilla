@@ -45,11 +45,18 @@ const MainNavigation = () => {
           </Link>
         </li>
         {user ? (
-          <li>
-            <button onClick={onLogout} className={classes.link}>
-              Logout
-            </button>
-          </li>
+          <React.Fragment>
+            <li>
+              <Link className={classes.link} to="/my-watchlist">
+                My Watchlist
+              </Link>
+            </li>
+            <li>
+              <Link onClick={onLogout} className={classes.link}>
+                Logout
+              </Link>
+            </li>
+          </React.Fragment>
         ) : (
           <React.Fragment>
             <li>

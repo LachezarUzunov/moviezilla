@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { login, reset } from "../../features/auth/authSlice";
+import Loader from "../layout/Loader";
 import classes from "./Login.module.css";
 
 const Login = () => {
@@ -50,6 +51,8 @@ const Login = () => {
 
     dispatch(login(userData));
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <section className={`main ${classes.card}`}>
