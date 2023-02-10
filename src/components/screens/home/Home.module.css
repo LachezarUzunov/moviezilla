@@ -71,6 +71,12 @@
   .movieList {
     margin: 2rem 4rem;
   }
+
+  .note {
+    margin-top: 1rem;
+    padding: 0rem;
+    width: auto;
+  }
 }
 
 @media screen and (max-width: 450px) {

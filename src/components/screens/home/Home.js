@@ -170,7 +170,8 @@ const Home = () => {
     }
   };
 
-  const saveList = async () => {
+  const saveList = () => {
+    console.log(movieData);
     // SAVING FILMS TO DATABASES
 
     // try {
@@ -195,7 +196,7 @@ const Home = () => {
     setSearched(false);
     setTextFile("");
     setPreviewClicked(false);
-    alert("SUCCESS");
+    navigate("/my-watchlist");
   };
 
   return (
