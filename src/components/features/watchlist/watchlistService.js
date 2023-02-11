@@ -24,7 +24,7 @@ const createList = async (listData, token) => {
 };
 
 const updateList = async (movie, listId, token) => {
-  const response = await fetch(APP_URL + listId, {
+  const response = await fetch(`${APP_URL}/${listId}`, {
     method: "PUT",
     body: JSON.stringify(movie),
     headers: {
@@ -36,6 +36,22 @@ const updateList = async (movie, listId, token) => {
   if (response.status === 201) {
     const updatedList = await response.json();
     return updatedList;
+  }
+};
+
+// Get my watchlist
+const getMyList = async (token) => {
+  const response = await fetch(`${APP_URL}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (response.status === 200) {
+    const myWatchlist = await response.json();
+    return myWatchlist;
   }
 };
 
@@ -58,6 +74,7 @@ const listService = {
   createList,
   deleteList,
   updateList,
+  getMyList,
 };
 
 export default listService;

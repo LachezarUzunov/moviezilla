@@ -31,6 +31,26 @@ export const createList = createAsyncThunk(
   }
 );
 
+// Get my watchlist
+export const getMyWatchlist = createAsyncThunk(
+  "/list/getMine",
+  async (_, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await listService.getMyList(token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const watchlistSlice = createSlice({
   name: "watchlist",
   initialState,
@@ -56,6 +76,19 @@ export const watchlistSlice = createSlice({
         state.isListLoading = false;
         state.isListError = true;
         state.listMessage = action.message;
+      })
+      .addCase(getMyWatchlist.pending, (state) => {
+        state.isListLoading = true;
+      })
+      .addCase(getMyWatchlist.fulfilled, (state, action) => {
+        state.isListLoading = false;
+        state.isListSuccess = true;
+        state.list = action.payload;
+      })
+      .addCase(getMyWatchlist.rejected, (state, action) => {
+        state.isListLoading = false;
+        state.isListError = true;
+        state.listMessage = action.payload;
       });
   },
 });
