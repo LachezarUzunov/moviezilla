@@ -1,11 +1,12 @@
 const APP_URL = "/api/lists";
 
 // Create a new watchlist
-const createList = async (user) => {
+const createList = async (listData, token) => {
   const response = await fetch(APP_URL, {
     method: "POST",
-    body: JSON.stringify(user),
+    body: JSON.stringify(listData),
     headers: {
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
   });

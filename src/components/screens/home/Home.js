@@ -6,6 +6,7 @@ import SingleMovie from "../SingleMovie/SingleMovie";
 import SingleTitle from "../../SingleTitle";
 import MovieHeading from "../SingleMovie/MovieHeading";
 import { FaAsterisk, FaSearch } from "react-icons/fa";
+import { createList } from "../../features/watchlist/watchlistSlice";
 
 const Home = () => {
   const [textFile, setTextFile] = useState("");
@@ -19,6 +20,8 @@ const Home = () => {
   const navigate = useNavigate();
 
   const { user } = useSelector((state) => state.auth);
+  const { list } = useSelector((state) => state.list);
+  console.log(list);
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -170,28 +173,22 @@ const Home = () => {
     }
   };
 
-  const saveList = () => {
-    console.log(movieData);
+  const onCreateList = () => {
+    const listData = [];
+    for (let i = 0; i < movieData.length; i++) {
+      movieData[i].results.forEach((res) => listData.push(res));
+    }
+
+    dispatch(createList(listData));
     // SAVING FILMS TO DATABASES
+    setMovieData([]);
+    setSearched(false);
+    setTextFile("");
+    setPreviewClicked(false);
+    navigate("/my-watchlist");
+  };
 
-    // try {
-    //   const res = await fetch(
-    //     `http://localhost:5000/api/post`,
-    //     {
-    //       method: "POST",
-    //       body: movieData,
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //     }
-    //   );
-
-    //   if (res.status === 201) {
-    //     alert("Success");
-    //   }
-    // } catch (error) {
-    //   console.log(error)
-    // }
+  const addToList = () => {
     setMovieData([]);
     setSearched(false);
     setTextFile("");
@@ -296,9 +293,13 @@ const Home = () => {
               Preview All Films
             </button>
           ) : null}
-          {previewClicked && user ? (
-            <button className="btn__primary" onClick={saveList}>
-              Save to watchlist
+          {previewClicked && user && list === null ? (
+            <button className="btn__primary" onClick={onCreateList}>
+              Save and create a watchlist
+            </button>
+          ) : previewClicked && user && list.length > 0 ? (
+            <button className="btn__primary" onClick={addToList}>
+              Add to watchlist
             </button>
           ) : null}
         </div>

@@ -14,9 +14,10 @@ const initialState = {
 // Create new watchlist
 export const createList = createAsyncThunk(
   "/list/create",
-  async (user, thunkApi) => {
+  async (listData, thunkApi) => {
     try {
-      return await listService.createList(user);
+      const token = thunkApi.getState().auth.user.token;
+      return await listService.createList(listData, token);
     } catch (error) {
       const listMessage =
         (error.response &&
