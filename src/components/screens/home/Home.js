@@ -21,7 +21,7 @@ const Home = () => {
 
   const { user } = useSelector((state) => state.auth);
   const { list } = useSelector((state) => state.list);
-  console.log(list);
+  const watchlist = list.newWatchlist.watchlist;
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -297,7 +297,7 @@ const Home = () => {
             <button className="btn__primary" onClick={onCreateList}>
               Save and create a watchlist
             </button>
-          ) : previewClicked && user && list.length > 0 ? (
+          ) : previewClicked && user && watchlist.length > 0 ? (
             <button className="btn__primary" onClick={addToList}>
               Add to watchlist
             </button>
