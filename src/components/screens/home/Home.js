@@ -21,7 +21,11 @@ const Home = () => {
 
   const { user } = useSelector((state) => state.auth);
   const { list } = useSelector((state) => state.list);
-  const watchlist = list.newWatchlist.watchlist;
+  const watchlist = list !== null ? list.newWatchlist.watchlist : [];
+
+  // useEffect(() => {
+
+  // }, [user])
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];

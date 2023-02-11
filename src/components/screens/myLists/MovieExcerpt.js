@@ -1,6 +1,7 @@
 import React from "react";
 
-const MovieExcerpt = ({ props }) => {
+const MovieExcerpt = ({ film }) => {
+  console.log(film);
   return (
     <article>
       <h2>Films</h2>

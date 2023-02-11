@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import MovieExcerpt from "./MovieExcerpt";
 
 const MyWatchlist = () => {
-  const { user } = useSelector((state) => state.auth);
+  // const { user } = useSelector((state) => state.auth);
   const { list } = useSelector((state) => state.list);
   console.log(list);
   const watchlist = list.newWatchlist.watchlist;
