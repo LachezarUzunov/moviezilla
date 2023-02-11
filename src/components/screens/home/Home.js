@@ -6,7 +6,10 @@ import SingleMovie from "../SingleMovie/SingleMovie";
 import SingleTitle from "../../SingleTitle";
 import MovieHeading from "../SingleMovie/MovieHeading";
 import { FaAsterisk, FaSearch } from "react-icons/fa";
-import { createList } from "../../features/watchlist/watchlistSlice";
+import {
+  createList,
+  getMyWatchlist,
+} from "../../features/watchlist/watchlistSlice";
 
 const Home = () => {
   const [textFile, setTextFile] = useState("");
@@ -20,12 +23,21 @@ const Home = () => {
   const navigate = useNavigate();
 
   const { user } = useSelector((state) => state.auth);
+  let watchlist = [];
+  useEffect(() => {
+    dispatch(getMyWatchlist());
+  }, [user, dispatch]);
   const { list } = useSelector((state) => state.list);
-  const watchlist = list !== null ? list.newWatchlist.watchlist : [];
 
-  // useEffect(() => {
-
-  // }, [user])
+  if (list === null) {
+    watchlist = [];
+  } else if (list !== null && list.length === 0) {
+    console.log(list);
+    watchlist = list;
+  } else if (list !== null && list.length === 1) {
+    console.log(list);
+    watchlist = list;
+  }
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -297,7 +309,7 @@ const Home = () => {
               Preview All Films
             </button>
           ) : null}
-          {previewClicked && user && list === null ? (
+          {previewClicked && user && watchlist.length === 0 ? (
             <button className="btn__primary" onClick={onCreateList}>
               Save and create a watchlist
             </button>

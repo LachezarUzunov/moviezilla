@@ -41,7 +41,7 @@ const updateList = async (movie, listId, token) => {
 
 // Get my watchlist
 const getMyList = async (token) => {
-  const response = await fetch(`${APP_URL}`, {
+  const response = await fetch(`${APP_URL}/mine`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
