@@ -14,9 +14,9 @@ const initialState = {
 // Create new watchlist
 export const createList = createAsyncThunk(
   "/list/create",
-  async (listData, thunkApi) => {
+  async (listData, thunkAPI) => {
     try {
-      const token = thunkApi.getState().auth.user.token;
+      const token = thunkAPI.getState().auth.user.token;
       return await listService.createList(listData, token);
     } catch (error) {
       const listMessage =
@@ -26,7 +26,27 @@ export const createList = createAsyncThunk(
         error.message ||
         error.toString();
 
-      return thunkApi.rejectWithValue(listMessage);
+      return thunkAPI.rejectWithValue(listMessage);
+    }
+  }
+);
+
+// Add movies to list
+export const updateMyList = createAsyncThunk(
+  "/list/update",
+  async (listData, listId, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await listService.updateList(listData, listId, token);
+    } catch (error) {
+      const listMessage =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      return thunkAPI.rejectWithValue(listMessage);
     }
   }
 );
@@ -86,6 +106,19 @@ export const watchlistSlice = createSlice({
         state.list = action.payload;
       })
       .addCase(getMyWatchlist.rejected, (state, action) => {
+        state.isListLoading = false;
+        state.isListError = true;
+        state.listMessage = action.payload;
+      })
+      .addCase(updateMyList.pending, (state) => {
+        state.isListLoading = true;
+      })
+      .addCase(updateMyList.fulfilled, (state, action) => {
+        state.isListLoading = false;
+        state.isListSuccess = true;
+        state.list = action.payload;
+      })
+      .addCase(updateMyList.rejected, (state, action) => {
         state.isListLoading = false;
         state.isListError = true;
         state.listMessage = action.payload;

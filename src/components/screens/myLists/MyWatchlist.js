@@ -1,5 +1,5 @@
 import React from "react";
-//import classes from "./myLists.module.css";
+import classes from "./MyWatchlist.module.css";
 import { useSelector } from "react-redux";
 import MovieExcerpt from "./MovieExcerpt";
 
@@ -10,15 +10,17 @@ const MyWatchlist = () => {
   console.log(watchlist);
 
   return (
-    <div>
+    <div className="main">
       <h1>My lists</h1>
-      {watchlist.length > 0 ? (
-        watchlist.map((film) => {
-          return <MovieExcerpt key={film.id} film={film} />;
-        })
-      ) : (
-        <h2>You do not have a created list</h2>
-      )}
+      <section className={classes.excerpts}>
+        {watchlist.length > 0 ? (
+          watchlist.map((film) => {
+            return <MovieExcerpt key={film.id} film={film} />;
+          })
+        ) : (
+          <h2>You do not have a created list</h2>
+        )}
+      </section>
     </div>
   );
 };

@@ -1,29 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { FaTrash } from "react-icons/fa";
-import classes from "./SingleMovie.module.css";
-import Actors from "./Actors";
-import Director from "./Director";
-import Genres from "./Genres";
+import classes from "./SingleMovieFromList.module.css";
+import Actors from "../SingleMovie/Actors";
+import Director from "../SingleMovie/Director";
+import Genres from "../SingleMovie/Genres";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const SingleMovie = ({
-  movie,
-  removeFromList,
-  index,
-  initialTitle,
-  movies,
-}) => {
+const SingleMovieFromList = () => {
   const [actors, setActors] = useState([]);
   const [directors, setDirectors] = useState([]);
   const [genres, setGenres] = useState([]);
   const [duration, setDuration] = useState();
   const [trailer, setTrailer] = useState();
 
+  const { id } = useParams();
+  const { list } = useSelector((state) => state.list);
+  const watchlist = list[0].watchlist;
+  console.log(watchlist[0].id);
+  console.log(id);
+  const film = watchlist.filter((m) => m.id.toString() === id);
+  console.log(film);
+
   useEffect(() => {
     const getActorsAndDirector = async () => {
       try {
         const response = await fetch(
-          ` https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=cd725d1c5efc50ead2110487dcd7be9e&language=en-US`
+          ` https://api.themoviedb.org/3/movie/${id}/credits?api_key=cd725d1c5efc50ead2110487dcd7be9e&language=en-US`
         );
 
         if (response.status === 200) {
@@ -47,7 +49,7 @@ const SingleMovie = ({
     const getGenreAndDuration = async () => {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${movie.id}?api_key=cd725d1c5efc50ead2110487dcd7be9e&language=en-US`
+          `https://api.themoviedb.org/3/movie/${id}?api_key=cd725d1c5efc50ead2110487dcd7be9e&language=en-US`
         );
 
         if (response.status === 200) {
@@ -67,7 +69,7 @@ const SingleMovie = ({
     const getTrailer = async () => {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=cd725d1c5efc50ead2110487dcd7be9e&language=en-US`
+          `https://api.themoviedb.org/3/movie/${id}/videos?api_key=cd725d1c5efc50ead2110487dcd7be9e&language=en-US`
         );
 
         if (response.status === 200) {
@@ -86,21 +88,13 @@ const SingleMovie = ({
     getTrailer();
   }, []);
 
-  const removeFilmFromList = () => {
-    removeFromList(movie.id, index, initialTitle, movies);
-  };
-
   return (
     <section className={classes.movies__results}>
       <div className={classes.movie__div}>
         <div className={classes.movie__heading}>
           <h3>
-            Original Title: <p>{movie.title}</p>
+            Original Title: <p>{film[0].title}</p>
           </h3>
-
-          <i children={classes.trash__btn}>
-            <FaTrash className="iconBtn" onClick={removeFilmFromList} />
-          </i>
         </div>
         <div>
           <div>
@@ -114,17 +108,17 @@ const SingleMovie = ({
         </div>
         <div>
           <h3>Plot:</h3>
-          <p>{movie.overview}</p>
+          <p>{film[0].overview}</p>
         </div>
         <div>
           <h3>Release Date</h3>
-          <p>{movie.released}</p>
+          <p>{film[0].released}</p>
         </div>
         <div>
           <h3>Duration: {duration} mins.</h3>
         </div>
         <div>
-          <h3>Rating: {movie.rating}</h3>
+          <h3>Rating: {film[0].rating}</h3>
         </div>
         <h3>Genres</h3>
         {genres.length > 0
@@ -144,7 +138,7 @@ const SingleMovie = ({
                 <iframe
                   width="420"
                   height="315"
-                  title={movie.original_title}
+                  title={film[0].original_title}
                   src={`https://www.youtube.com/embed/${trailer.key}`}
                 ></iframe>
               </div>
@@ -156,4 +150,4 @@ const SingleMovie = ({
   );
 };
 
-export default SingleMovie;
+export default SingleMovieFromList;

@@ -9,6 +9,7 @@ import { FaAsterisk, FaSearch } from "react-icons/fa";
 import {
   createList,
   getMyWatchlist,
+  updateMyList,
 } from "../../features/watchlist/watchlistSlice";
 
 const Home = () => {
@@ -18,12 +19,12 @@ const Home = () => {
   const [previewClicked, setPreviewClicked] = useState(false);
   const [searched, setSearched] = useState(false);
   const [inputSearch, setInputSearch] = useState("");
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { user } = useSelector((state) => state.auth);
   let watchlist = [];
+  let listId;
   useEffect(() => {
     dispatch(getMyWatchlist());
   }, [user, dispatch]);
@@ -35,7 +36,7 @@ const Home = () => {
     console.log(list);
     watchlist = list;
   } else if (list !== null && list.length === 1) {
-    console.log(list);
+    listId = list[0]._id;
     watchlist = list;
   }
 
@@ -195,8 +196,9 @@ const Home = () => {
       movieData[i].results.forEach((res) => listData.push(res));
     }
 
-    dispatch(createList(listData));
     // SAVING FILMS TO DATABASES
+    dispatch(createList(listData));
+
     setMovieData([]);
     setSearched(false);
     setTextFile("");
@@ -205,6 +207,14 @@ const Home = () => {
   };
 
   const addToList = () => {
+    const listData = [];
+    for (let i = 0; i < movieData.length; i++) {
+      movieData[i].results.forEach((res) => listData.push(res));
+    }
+
+    // ADD movies to database
+    dispatch(updateMyList(listData, listId));
+
     setMovieData([]);
     setSearched(false);
     setTextFile("");

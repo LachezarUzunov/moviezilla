@@ -8,6 +8,7 @@ import Register from "./components/screens/Register/Register";
 import Login from "./components/screens/Login/Login";
 import MyWatchlist from "./components/screens/myLists/MyWatchlist";
 import PrivateRoute from "./components/PrivateRoute";
+import SingleMovieFromList from "./components/screens/myLists/SingleMovieFromList";
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/my-watchlist" element={<PrivateRoute />}>
             <Route path="/my-watchlist" element={<MyWatchlist />} />
+          </Route>
+          <Route path="/movie/:id" element={<PrivateRoute />}>
+            <Route path="/movie/:id" element={<SingleMovieFromList />} />
           </Route>
         </Routes>
       </main>

@@ -51,6 +51,7 @@ const getMyList = async (token) => {
 
   if (response.status === 200) {
     const myWatchlist = await response.json();
+    localStorage.setItem("list", JSON.stringify(myWatchlist));
     return myWatchlist;
   }
 };
