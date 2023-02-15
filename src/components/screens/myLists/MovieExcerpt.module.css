@@ -1,8 +1,17 @@
 .film__excerpt {
-  width: 300px;
-  height: 300px;
+  margin-top: 4rem;
+  width: 200px;
+}
+
+.film__title {
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 .film__poster {
-  width: 300px;
+  width: 200px;
 }

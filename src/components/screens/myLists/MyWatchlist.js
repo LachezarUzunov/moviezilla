@@ -11,7 +11,6 @@ const MyWatchlist = () => {
 
   return (
     <div className="main">
-      <h1>My lists</h1>
       <section className={classes.excerpts}>
         {watchlist.length > 0 ? (
           watchlist.map((film) => {

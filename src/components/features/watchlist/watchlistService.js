@@ -23,18 +23,25 @@ const createList = async (listData, token) => {
   }
 };
 
-const updateList = async (movie, listId, token) => {
+const updateList = async (listData, listId, token) => {
+  console.log(listId);
   const response = await fetch(`${APP_URL}/${listId}`, {
     method: "PUT",
-    body: JSON.stringify(movie),
+    body: JSON.stringify(listData),
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
   });
 
+  if (response.status === 400) {
+    const error = await response.json();
+    throw new Error(error.message);
+  }
+
   if (response.status === 201) {
     const updatedList = await response.json();
+    localStorage.setItem("list", JSON.stringify(updatedList));
     return updatedList;
   }
 };

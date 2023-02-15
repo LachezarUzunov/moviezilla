@@ -211,9 +211,8 @@ const Home = () => {
     for (let i = 0; i < movieData.length; i++) {
       movieData[i].results.forEach((res) => listData.push(res));
     }
-
     // ADD movies to database
-    dispatch(updateMyList(listData, listId));
+    dispatch(updateMyList(listData));
 
     setMovieData([]);
     setSearched(false);
