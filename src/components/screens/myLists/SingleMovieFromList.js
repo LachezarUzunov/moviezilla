@@ -155,6 +155,7 @@ const SingleMovieFromList = () => {
               <h3>Trailer</h3>
               <div>
                 <iframe
+                  className={classes.trailer__frame}
                   width="420"
                   height="315"
                   title={film[0].original_title}

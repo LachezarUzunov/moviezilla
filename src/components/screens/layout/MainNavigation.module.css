@@ -1,4 +1,113 @@
-nav {
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  width: 100%;
+  height: 100px;
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10%;
+}
+
+.lis {
+  display: flex;
+  gap: 2rem;
+}
+
+li {
+  list-style: none;
+  text-transform: uppercase;
+}
+
+li > a {
+  color: yellow;
+}
+
+.link__to_top {
+  display: none;
+}
+
+.mobile__btn {
+  display: none;
+}
+
+/* ============= MEDIA QUERIES (SMALL DEVICES) ============== */
+@media screen and (max-width: 450px) {
+  li > a {
+    color: black;
+  }
+
+  .header {
+    flex-direction: column;
+    padding: 0 0%;
+  }
+
+  .mobile__section {
+    margin-top: 30px;
+    width: 90%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .mobile__btn {
+    display: flex;
+    background-color: yellow;
+    font-size: 1.6rem;
+    border: none;
+  }
+
+  nav {
+    background-color: yellow;
+    width: 100%;
+    padding: 0px;
+    z-index: 1;
+    margin-top: 20px;
+  }
+
+  .lis {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    padding: 20px;
+    border-top: 2px solid var(--deep-purple);
+  }
+
+  .lis li {
+    border-bottom: 2px solid var(--deep-purple);
+    padding: 10px;
+  }
+
+  .lis li:last-child {
+    border-bottom: none;
+  }
+
+  .display {
+    display: none;
+  }
+
+  .link__to_top {
+    display: block;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+    color: yellow;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px black;
+    cursor: pointer;
+    background-color: black;
+  }
+}
+
+/* nav {
   height: 8vh;
 }
 
@@ -17,6 +126,10 @@ nav {
   display: none;
 }
 
+.menu__div {
+  background-color: aqua;
+}
+
 @media screen and (max-width: 1200px) {
 }
 
@@ -24,17 +137,21 @@ nav {
   .display {
     display: none;
   }
+  .menu__div {
+    z-index: 1;
+    background-color: aqua;
+  }
 
   nav {
-    z-index: 1;
+    z-index: 999;
   }
 
   .nav {
     flex-direction: column;
     gap: 1rem;
-    background-color: red;
+
     text-align: center;
-    z-index: 0;
+    z-index: 1;
   }
 
   .mob_menu_div {
@@ -51,4 +168,4 @@ nav {
 }
 
 @media screen and (max-width: 370px) {
-}
+} */
