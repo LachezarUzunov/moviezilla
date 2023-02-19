@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const SingleMovieFromList = () => {
+  const POSTER_URL = "https://image.tmdb.org/t/p/original";
   const [actors, setActors] = useState([]);
   const [directors, setDirectors] = useState([]);
   const [genres, setGenres] = useState([]);
@@ -16,8 +17,7 @@ const SingleMovieFromList = () => {
   const { id } = useParams();
   const { list } = useSelector((state) => state.list);
   const watchlist = list[0].watchlist;
-  console.log(watchlist[0].id);
-  console.log(id);
+
   const film = watchlist.filter((m) => m.id.toString() === id);
   console.log(film);
 
@@ -89,52 +89,71 @@ const SingleMovieFromList = () => {
   }, []);
 
   return (
-    <section className={classes.movies__results}>
-      <div className={classes.movie__div}>
-        <div className={classes.movie__heading}>
-          <h3>
-            Original Title: <p>{film[0].title}</p>
-          </h3>
-        </div>
-        <div>
-          <div>
-            {directors.length > 1 ? <h3>Directors:</h3> : <h3>Director:</h3>}
-            {directors.length > 0
-              ? directors.map((director) => (
-                  <Director director={director} key={director.id} />
-                ))
-              : null}
-          </div>
-        </div>
-        <div>
-          <h3>Plot:</h3>
-          <p>{film[0].overview}</p>
-        </div>
-        <div>
-          <h3>Release Date</h3>
-          <p>{film[0].released}</p>
-        </div>
-        <div>
-          <h3>Duration: {duration} mins.</h3>
-        </div>
-        <div>
-          <h3>Rating: {film[0].rating}</h3>
-        </div>
-        <h3>Genres</h3>
-        {genres.length > 0
-          ? genres.map((genre) => <Genres genre={genre.name} key={genre.id} />)
-          : null}
-        <h3>Cast</h3>
-        {actors.length > 0
-          ? actors
-              .slice(0, 10)
-              .map((actor) => <Actors actor={actor} key={actor.id} />)
-          : null}
+    <section className="main">
+      <section className={classes.movie__section}>
+        <section className={classes.movie__subsection}>
+          <article>
+            <img
+              className={classes.film__poster}
+              src={`${POSTER_URL}${film[0].poster}`}
+              alt="poster"
+            />
+          </article>
+          <section className={classes.movies__info}>
+            <div className={classes.movie__div}>
+              <div className={classes.movie__heading}>
+                <h3>
+                  Original Title: <p>{film[0].title}</p>
+                </h3>
+              </div>
+              <div>
+                <div>
+                  {directors.length > 1 ? (
+                    <h3>Directors:</h3>
+                  ) : (
+                    <h3>Director:</h3>
+                  )}
+                  {directors.length > 0
+                    ? directors.map((director) => (
+                        <Director director={director} key={director.id} />
+                      ))
+                    : null}
+                </div>
+              </div>
+              <div>
+                <h3>Plot:</h3>
+                <p>{film[0].overview}</p>
+              </div>
+              <div>
+                <h3>Release Date</h3>
+                <p>{film[0].released}</p>
+              </div>
+              <div>
+                <h3>Duration: {duration} mins.</h3>
+              </div>
+              <div>
+                <h3>Rating: {film[0].rating}</h3>
+              </div>
+              <h3>Genres</h3>
+              {genres.length > 0
+                ? genres.map((genre) => (
+                    <Genres genre={genre.name} key={genre.id} />
+                  ))
+                : null}
+              <h3>Cast</h3>
+              {actors.length > 0
+                ? actors
+                    .slice(0, 10)
+                    .map((actor) => <Actors actor={actor} key={actor.id} />)
+                : null}
+            </div>
+          </section>
+        </section>
         <div>
           {trailer ? (
-            <div>
+            <div className={classes.trailer}>
               <h3>Trailer</h3>
-              <div className={classes.trailer}>
+              <div>
                 <iframe
                   width="420"
                   height="315"
@@ -145,7 +164,7 @@ const SingleMovieFromList = () => {
             </div>
           ) : null}
         </div>
-      </div>
+      </section>
     </section>
   );
 };

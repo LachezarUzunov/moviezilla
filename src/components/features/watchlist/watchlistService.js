@@ -24,7 +24,6 @@ const createList = async (listData, token) => {
 };
 
 const updateList = async (listData, listId, token) => {
-  console.log(listId);
   const response = await fetch(`${APP_URL}/${listId}`, {
     method: "PUT",
     body: JSON.stringify(listData),
@@ -39,9 +38,11 @@ const updateList = async (listData, listId, token) => {
     throw new Error(error.message);
   }
 
-  if (response.status === 201) {
+  if (response.status === 200) {
     const updatedList = await response.json();
+    console.log(updatedList);
     localStorage.setItem("list", JSON.stringify(updatedList));
+
     return updatedList;
   }
 };
