@@ -203,6 +203,7 @@ const Home = () => {
     setSearched(false);
     setTextFile("");
     setPreviewClicked(false);
+    dispatch(getMyWatchlist());
     navigate("/my-watchlist");
   };
 

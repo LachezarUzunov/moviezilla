@@ -51,16 +51,15 @@ li > a {
 
   .mobile__section {
     margin-top: 30px;
-    width: 90%;
     display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
+    justify-content: center;
   }
 
   .mobile__btn {
     display: flex;
-    background-color: yellow;
-    font-size: 1.6rem;
+    background-color: black;
+    color: yellow;
+    font-size: 2rem;
     border: none;
   }
 
