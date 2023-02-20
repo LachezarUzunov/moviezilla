@@ -1,4 +1,4 @@
-const APP_URL = "/api/lists";
+const APP_URL = "https://moviezilla-backend.onrender.com/api/lists";
 
 // Create a new watchlist
 const createList = async (listData, token) => {

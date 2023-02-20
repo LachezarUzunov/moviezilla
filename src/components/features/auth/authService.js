@@ -1,4 +1,4 @@
-const APP_URL = "/api/users";
+const APP_URL = "https://moviezilla-backend.onrender.com/api/users";
 
 // Register user
 const register = async (userData) => {

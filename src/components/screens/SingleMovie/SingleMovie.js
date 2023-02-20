@@ -4,7 +4,6 @@ import classes from "./SingleMovie.module.css";
 import Actors from "./Actors";
 import Director from "./Director";
 import Genres from "./Genres";
-import { useParams } from "react-router-dom";
 
 const SingleMovie = ({
   movie,

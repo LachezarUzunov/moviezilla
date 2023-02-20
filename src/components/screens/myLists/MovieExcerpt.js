@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import classes from "./MovieExcerpt.module.css";
 import { Link } from "react-router-dom";
 
@@ -19,7 +19,6 @@ const MovieExcerpt = ({ film }) => {
           alt="poster"
         />
         <h3>Rating: {film.rating}</h3>
-        {/* <h3>Relesed: {film.released}</h3> */}
         <Link
           className={`${classes.view__more} btn__primary`}
           to={`/movie/${film.id}`}
